@@ -1,5 +1,5 @@
 {
-    "name": "osmscripts/osm",
+    "name": "osmscripts\/osm",
     "description": "Code generation and maintenance commands for Osm framework-based project.",
     "license": "GPL-3.0-only",
     "authors": [
@@ -10,16 +10,22 @@
     ],
     "autoload": {
         "psr-4": {
-            "OsmScripts\\Osm\\": "src/"
+            "OsmScripts\\Osm\\": "src\/"
         }
     },
     "require": {
         "php": ">=7.1",
-        "osmscripts/core": "1.*"
+        "osmscripts\/core": "1.*"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
+        },
+        "osm": {
+            "commands": {
+                "create:module": "OsmScripts\\Osm\\Commands\\CreateModule",
+                "create:package": "OsmScripts\\Osm\\Commands\\CreatePackage"
+            }
         }
     },
     "bin": [
