@@ -26,7 +26,7 @@ class CreatePackage extends BaseCreatePackage
             case 'sample_namespace': return $this->sample_namespace = "{$this->namespace}Samples\\";
         }
 
-        return null;
+        return parent::__get($property);
     }
     #endregion
 
