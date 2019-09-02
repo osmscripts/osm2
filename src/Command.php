@@ -6,9 +6,12 @@ use Exception;
 use Osm\Core\App;
 use OsmScripts\Core\Command as BaseCommand;
 use OsmScripts\Core\Files;
+use OsmScripts\Core\Hints\PackageHint;
+use OsmScripts\Core\Php;
 use OsmScripts\Core\Project;
 use OsmScripts\Core\Script;
 use OsmScripts\Core\Shell;
+use OsmScripts\Core\Utils;
 use OsmScripts\Core\Variables;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,7 +21,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @property Project $project Information about Composer project in current working directory
  * @property Files $files @required Helper for generating files.
  * @property Shell $shell @required Helper for running commands in local shell
+ * @property Php $php @required
+ * @property Utils $utils @required
  * @property App $app
+ * @property string $project_package
  */
 class Command extends BaseCommand
 {
@@ -32,11 +38,14 @@ class Command extends BaseCommand
             case 'project': return $this->project = new Project(['path' => $script->cwd]);
             case 'files': return $this->files = $script->singleton(Files::class);
             case 'shell': return $this->shell = $script->singleton(Shell::class);
+            case 'php': return $this->php = $script->singleton(Php::class);
+            case 'utils': return $this->utils = $script->singleton(Utils::class);
 
             case 'app': return $this->app = App::createApp([
                 'base_path' => realpath($script->cwd . '/'),
                 'env' => 'testing',
             ]);
+            case 'project_package': return $this->project_package = $this->getProjectPackage();
         }
 
         return parent::__get($property);
@@ -55,5 +64,11 @@ class Command extends BaseCommand
             throw new Exception("Before running this command, make directory of your " .
                 "Osm project a current directory");
         }
+    }
+
+    protected function getProjectPackage() {
+        /* @var PackageHint $json */
+        $json = $this->utils->readJsonOrFail($this->app->path('composer.json'));
+        return $json->name;
     }
 }

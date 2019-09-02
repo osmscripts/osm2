@@ -28,12 +28,11 @@ class CreateModule extends Command
     #region Properties
     public function __get($property) {
         switch ($property) {
-            case 'component_pool':
-                return $this->component_pool = $this->input->getOption('sample') ? 'samples' : 'src';
+            case 'component_pool': return $this->component_pool = $this->getComponentPoolName();
             case 'module': return $this->module = $this->input->getArgument('module');
             case 'package': return $this->package = $this->input->getOption('package');
 
-            case 'package_': return $this->package_ = $this->app->packages[$this->package];
+            case 'package_': return $this->package_ = $this->getPackage();
             case 'component_pool_': return $this->component_pool_ = $this->getComponentPool();
             case 'module_path_pattern': return $this->module_path_pattern = $this->getModuleNamePattern();
             case 'full_module_name': return $this->full_module_name = $this->getFullModuleName();
@@ -64,10 +63,28 @@ class CreateModule extends Command
 
     protected function getFullModuleName() {
         if (!$this->component_pool_->namespace) {
-            throw new Exception("namespace of '{$this->component_pool}' component pool is not defined.");
+            throw new Exception("Namespace of '{$this->component_pool}' component pool is not defined.");
         }
 
         return strtr($this->component_pool_->namespace, '\\', '_') . "_{$this->module}";
+    }
+
+    protected function getPackage() {
+        if (!isset($this->app->packages[$this->package])) {
+            throw new Exception("Package '{$this->package}' not found.");
+        }
+
+        return $this->app->packages[$this->package];
+    }
+
+    protected function getComponentPoolName() {
+        $result = $this->input->getOption('sample') ? 'samples' : 'src';
+
+        if ($this->package = $this->project_package) {
+            $result = "app/{$result}";
+        }
+
+        return $result;
     }
     #endregion
 
@@ -82,7 +99,7 @@ class CreateModule extends Command
             ->addOption('package', null, InputOption::VALUE_REQUIRED,
                 "Name of Composer package in which script will be created, " .
                 "should be in `{vendor}/{package}` format. If not set, \$package script variable is used",
-                $this->variables->get('package'))
+                $this->variables->get('package') ?: $this->project_package)
             ;
     }
 

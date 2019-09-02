@@ -26,7 +26,8 @@
                 "create:module": "OsmScripts\\Osm\\Commands\\CreateModule",
                 "create:package": "OsmScripts\\Osm\\Commands\\CreatePackage",
                 "modules": "OsmScripts\\Osm\\Commands\\Modules",
-                "packages": "OsmScripts\\Osm\\Commands\\Packages"
+                "packages": "OsmScripts\\Osm\\Commands\\Packages",
+                "create:command": "OsmScripts\\Osm\\Commands\\CreateCommand"
             }
         }
     },
