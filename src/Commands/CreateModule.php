@@ -80,7 +80,7 @@ class CreateModule extends Command
     protected function getComponentPoolName() {
         $result = $this->input->getOption('sample') ? 'samples' : 'src';
 
-        if ($this->package = $this->project_package) {
+        if ($this->package == $this->project_package) {
             $result = "app/{$result}";
         }
 
