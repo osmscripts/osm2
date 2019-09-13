@@ -23,6 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @property Shell $shell @required Helper for running commands in local shell
  * @property Php $php @required
  * @property Utils $utils @required
+ * @property string $env
  * @property App $app
  * @property string $project_package
  */
@@ -40,11 +41,10 @@ class Command extends BaseCommand
             case 'shell': return $this->shell = $script->singleton(Shell::class);
             case 'php': return $this->php = $script->singleton(Php::class);
             case 'utils': return $this->utils = $script->singleton(Utils::class);
-
             case 'app': return $this->app = App::createApp([
                 'base_path' => realpath($script->cwd . '/'),
-                'env' => 'testing',
-            ]);
+                'env' => $this->env,
+            ])->boot();
             case 'project_package': return $this->project_package = $this->getProjectPackage();
         }
 
