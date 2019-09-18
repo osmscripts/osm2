@@ -12,13 +12,6 @@ use OsmScripts\Osm\Command;
  */
 class Modules extends Command
 {
-    public function __get($property) {
-        switch ($property) {
-            case 'env': return $this->env = 'testing';
-        }
-        return parent::__get($property);
-    }
-
     protected function configure() {
         $this->setDescription("Lists installed Osm modules");
     }

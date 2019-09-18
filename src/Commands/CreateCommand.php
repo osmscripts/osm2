@@ -24,10 +24,7 @@ class CreateCommand extends ModuleCommand
         switch ($property) {
             case 'command': return $this->command = $this->input->getArgument('cmd');
             case 'class': return $this->class = "{$this->module_->namespace}\\Commands\\{$this->getClass()}";
-            case 'class_': return $this->class_ = new Class_([
-                'name' => $this->class,
-                'module' => $this->module_,
-            ]);
+            case 'class_': return $this->class_ = new Class_(['name' => $this->class, 'module' => $this->module_]);
         }
 
         return parent::__get($property);

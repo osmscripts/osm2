@@ -18,6 +18,7 @@ class Backup extends Command
     #region Properties
     public function __get($property) {
         switch ($property) {
+            case 'env': return $this->env = null;
             case 'filename':
                 return $this->filename = "{$this->app->temp_path}/db.sql";
         }

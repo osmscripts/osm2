@@ -7,10 +7,12 @@ use Osm\Core\App;
 use OsmScripts\Core\Command as BaseCommand;
 use OsmScripts\Core\Files;
 use OsmScripts\Core\Hints\PackageHint;
+use OsmScripts\Core\Js;
 use OsmScripts\Core\Php;
 use OsmScripts\Core\Project;
 use OsmScripts\Core\Script;
 use OsmScripts\Core\Shell;
+use OsmScripts\Core\Str;
 use OsmScripts\Core\Utils;
 use OsmScripts\Core\Variables;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,7 +23,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @property Project $project Information about Composer project in current working directory
  * @property Files $files @required Helper for generating files.
  * @property Shell $shell @required Helper for running commands in local shell
+ * @property Str $str @required
  * @property Php $php @required
+ * @property Js $js @required
  * @property Utils $utils @required
  * @property string $env
  * @property App $app
@@ -40,7 +44,10 @@ class Command extends BaseCommand
             case 'files': return $this->files = $script->singleton(Files::class);
             case 'shell': return $this->shell = $script->singleton(Shell::class);
             case 'php': return $this->php = $script->singleton(Php::class);
+            case 'js': return $this->js = $script->singleton(Js::class);
             case 'utils': return $this->utils = $script->singleton(Utils::class);
+            case 'str': return $this->str = $script->singleton(Str::class);
+            case 'env': return $this->env = 'testing';
             case 'app': return $this->app = App::createApp([
                 'base_path' => realpath($script->cwd . '/'),
                 'env' => $this->env,
