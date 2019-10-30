@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "php": "^7.2",
+        "php": "^7.2"
     },
     "extra": {
         "branch-alias": {
@@ -23,8 +23,8 @@
         "osm": {
             "component_pools": {
                 "src": {
-                    "module_path": "*/*/Module.php",
-                    "theme_path": "*/*/theme.php"
+                    "module_path": "*/Module.php",
+                    "theme_path": "*/theme.php"
                 },
                 "samples": {
                     "module_path": "*/Module.php",
