@@ -20,14 +20,14 @@ use Symfony\Component\Console\Input\InputOption;
 class CreateCommand extends ModuleCommand
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'command': return $this->command = $this->input->getArgument('cmd');
-            case 'class': return $this->class = "{$this->module_->namespace}\\Commands\\{$this->getClass()}";
-            case 'class_': return $this->class_ = new Class_(['name' => $this->class, 'module' => $this->module_]);
+            case 'command': return $this->input->getArgument('cmd');
+            case 'class': return "{$this->module_->namespace}\\Commands\\{$this->getClass()}";
+            case 'class_': return new Class_(['name' => $this->class, 'module' => $this->module_]);
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
 
     protected function getClass() {

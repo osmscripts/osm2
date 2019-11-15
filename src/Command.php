@@ -34,28 +34,28 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Command extends BaseCommand
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         /* @var Script $script */
         global $script;
 
         switch ($property) {
-            case 'variables': return $this->variables = $script->singleton(Variables::class);
-            case 'project': return $this->project = new Project(['path' => $script->cwd]);
-            case 'files': return $this->files = $script->singleton(Files::class);
-            case 'shell': return $this->shell = $script->singleton(Shell::class);
-            case 'php': return $this->php = $script->singleton(Php::class);
-            case 'js': return $this->js = $script->singleton(Js::class);
-            case 'utils': return $this->utils = $script->singleton(Utils::class);
-            case 'str': return $this->str = $script->singleton(Str::class);
-            case 'env': return $this->env = 'testing';
-            case 'app': return $this->app = App::createApp([
+            case 'variables': return $script->singleton(Variables::class);
+            case 'project': return new Project(['path' => $script->cwd]);
+            case 'files': return $script->singleton(Files::class);
+            case 'shell': return $script->singleton(Shell::class);
+            case 'php': return $script->singleton(Php::class);
+            case 'js': return $script->singleton(Js::class);
+            case 'utils': return $script->singleton(Utils::class);
+            case 'str': return $script->singleton(Str::class);
+            case 'env': return 'testing';
+            case 'app': return App::createApp([
                 'base_path' => realpath($script->cwd . '/'),
                 'env' => $this->env,
             ])->boot();
-            case 'project_package': return $this->project_package = $this->getProjectPackage();
+            case 'project_package': $this->getProjectPackage();
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 

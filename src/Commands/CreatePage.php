@@ -19,20 +19,17 @@ use Symfony\Component\Console\Input\InputOption;
 class CreatePage extends RouteCommand
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         /* @var Script $script */
         global $script;
 
         switch ($property) {
-            case 'layer': return $this->layer =
-                strtr(substr($this->route_name, 1), '/-', '__');
-            case 'css_modifier': return $this->css_modifier =
-                strtr($this->route_name, '/', '-');
-            case 'js_class': return $this->js_class =
-                $this->input->getOption('js-class') ?: ucfirst($this->method);
+            case 'layer': return strtr(substr($this->route_name, 1), '/-', '__');
+            case 'css_modifier': return strtr($this->route_name, '/', '-');
+            case 'js_class': return $this->input->getOption('js-class') ?: ucfirst($this->method);
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 

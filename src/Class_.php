@@ -18,18 +18,18 @@ use OsmScripts\Core\Project;
 class Class_ extends Project
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
             case 'relative_name':
-                return $this->relative_name = mb_substr($this->name, mb_strlen($this->module->namespace) + 1);
+                return mb_substr($this->name, mb_strlen($this->module->namespace) + 1);
             case 'filename':
-                return $this->filename = strtr($this->relative_name, '\\', '/') . ".php";
-            case 'last_delimiter_pos': return $this->last_delimiter_pos = mb_strrpos($this->name, '\\');
-            case 'namespace': return $this->namespace = mb_substr($this->name, 0, $this->last_delimiter_pos);
-            case 'short_name': return $this->short_name = mb_substr($this->name, $this->last_delimiter_pos + 1);
+                return strtr($this->relative_name, '\\', '/') . ".php";
+            case 'last_delimiter_pos': return mb_strrpos($this->name, '\\');
+            case 'namespace': return mb_substr($this->name, 0, $this->last_delimiter_pos);
+            case 'short_name': return mb_substr($this->name, $this->last_delimiter_pos + 1);
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 }

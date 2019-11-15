@@ -17,13 +17,13 @@ use Symfony\Component\Console\Input\InputArgument;
 class In extends Command
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'path': return $this->path = $this->input->getArgument('path');
-            case 'relative_path': return $this->relative_path = $this->getRelativePath();
+            case 'path': return $this->input->getArgument('path');
+            case 'relative_path': return $this->getRelativePath();
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
 
     protected function getRelativePath() {

@@ -17,16 +17,16 @@ use OsmScripts\Core\Script;
 class CreatePackage extends BaseCreatePackage
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         /* @var Script $script */
         global $script;
 
         switch ($property) {
-            case 'test_namespace': return $this->test_namespace = "{$this->namespace}Tests\\";
-            case 'sample_namespace': return $this->sample_namespace = "{$this->namespace}Samples\\";
+            case 'test_namespace': return "{$this->namespace}Tests\\";
+            case 'sample_namespace': return "{$this->namespace}Samples\\";
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 

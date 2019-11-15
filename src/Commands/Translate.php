@@ -16,13 +16,13 @@ use Symfony\Component\Console\Input\InputArgument;
 class Translate extends ModuleCommand
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'string': return $this->string = $this->input->getArgument('string');
-            case 'quoted_string': return $this->quoted_string = '"' .  addslashes($this->string) . '"';
+            case 'string': return $this->input->getArgument('string');
+            case 'quoted_string': return '"' .  addslashes($this->string) . '"';
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 

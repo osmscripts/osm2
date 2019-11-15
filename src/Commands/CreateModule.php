@@ -26,19 +26,19 @@ use Symfony\Component\Console\Input\InputOption;
 class CreateModule extends Command
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'component_pool': return $this->component_pool = $this->getComponentPoolName();
-            case 'module': return $this->module = $this->input->getArgument('module');
-            case 'package': return $this->package = $this->input->getOption('package');
+            case 'component_pool': return $this->getComponentPoolName();
+            case 'module': return $this->input->getArgument('module');
+            case 'package': return $this->input->getOption('package');
 
-            case 'package_': return $this->package_ = $this->getPackage();
-            case 'component_pool_': return $this->component_pool_ = $this->getComponentPool();
-            case 'module_path_pattern': return $this->module_path_pattern = $this->getModuleNamePattern();
-            case 'full_module_name': return $this->full_module_name = $this->getFullModuleName();
+            case 'package_': return $this->getPackage();
+            case 'component_pool_': return $this->getComponentPool();
+            case 'module_path_pattern': return $this->getModuleNamePattern();
+            case 'full_module_name': return $this->getFullModuleName();
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
 
     protected function getComponentPool() {

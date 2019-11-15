@@ -25,20 +25,20 @@ abstract class RouteCommand extends AreaCommand
     public $returns = null;
 
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'route_method': return $this->route_method = $this->use_http_get
+            case 'route_method': return $this->use_http_get
                 ? 'GET' :
                 $this->str->upper($this->input->getArgument('route-method'));
-            case 'route': return $this->route = $this->input->getArgument('route');
-            case 'route_name': return $this->route_name = $this->getRouteName();
-            case 'class': return $this->class = "{$this->module_->namespace}\\Controllers\\" . ucfirst($this->area);
-            case 'class_': return $this->class_ = new Class_(['name' => $this->class, 'module' => $this->module_]);
-            case 'method': return $this->method = $this->getMethod();
-            case 'public': return $this->public = $this->input->getOption('public');
+            case 'route': return $this->input->getArgument('route');
+            case 'route_name': return $this->getRouteName();
+            case 'class': return "{$this->module_->namespace}\\Controllers\\" . ucfirst($this->area);
+            case 'class_': return new Class_(['name' => $this->class, 'module' => $this->module_]);
+            case 'method': return $this->getMethod();
+            case 'public': return $this->input->getOption('public');
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
 
     protected function getRouteName() {

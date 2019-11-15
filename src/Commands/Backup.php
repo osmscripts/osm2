@@ -16,14 +16,13 @@ use OsmScripts\Osm\Command;
 class Backup extends Command
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'env': return $this->env = null;
-            case 'filename':
-                return $this->filename = "{$this->app->temp_path}/db.sql";
+            case 'env': return null;
+            case 'filename': return "{$this->app->temp_path}/db.sql";
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 

@@ -12,13 +12,13 @@ use Symfony\Component\Console\Input\InputOption;
 class AreaCommand extends ModuleCommand
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'area': return $this->area = $this->input->getOption('area');
-            case 'area_': return $this->area_ = $this->app->areas[$this->area];
+            case 'area': return $this->input->getOption('area');
+            case 'area_': return $this->app->areas[$this->area];
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 

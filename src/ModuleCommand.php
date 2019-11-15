@@ -15,16 +15,16 @@ use Symfony\Component\Console\Input\InputOption;
 class ModuleCommand extends Command
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         switch ($property) {
-            case 'module': return $this->module = $this->input->getOption('module');
-            case 'module_': return $this->module_ = $this->app->modules[$this->module];
-            case 'package_': return $this->package_ = $this->module_->package_;
+            case 'module': return $this->input->getOption('module');
+            case 'module_': return $this->app->modules[$this->module];
+            case 'package_': return $this->module_->package_;
             case 'module_path':
-                return $this->module_path = mb_substr($this->module_->path, mb_strlen($this->package_->path) + 1);
+                return mb_substr($this->module_->path, mb_strlen($this->package_->path) + 1);
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 
