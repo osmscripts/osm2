@@ -70,6 +70,16 @@ class CreateModule extends Command
     }
 
     protected function getPackage() {
+        if (!$this->package) {
+            foreach ($this->app->packages as $package) {
+                if ($package->project) {
+                    return $package;
+                }
+            }
+
+            throw new Exception("Package '{$this->package}' not found.");
+        }
+
         if (!isset($this->app->packages[$this->package])) {
             throw new Exception("Package '{$this->package}' not found.");
         }
