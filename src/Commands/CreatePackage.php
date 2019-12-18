@@ -16,6 +16,8 @@ use OsmScripts\Core\Script;
  */
 class CreatePackage extends BaseCreatePackage
 {
+    public $no_scripts = true;
+
     #region Properties
     public function default($property) {
         /* @var Script $script */
