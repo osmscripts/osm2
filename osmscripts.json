@@ -1,0 +1,18 @@
+{
+    "osm": {
+        "commands": {
+            "create:module": "OsmScripts\\Osm\\Commands\\CreateModule",
+            "create:package": "OsmScripts\\Osm\\Commands\\CreatePackage",
+            "modules": "OsmScripts\\Osm\\Commands\\Modules",
+            "packages": "OsmScripts\\Osm\\Commands\\Packages",
+            "create:command": "OsmScripts\\Osm\\Commands\\CreateCommand",
+            "backup": "OsmScripts\\Osm\\Commands\\Backup",
+            "restore": "OsmScripts\\Osm\\Commands\\Restore",
+            "create:page": "OsmScripts\\Osm\\Commands\\CreatePage",
+            "create:route": "OsmScripts\\Osm\\Commands\\CreateRoute",
+            "translate": "OsmScripts\\Osm\\Commands\\Translate",
+            "in": "OsmScripts\\Osm\\Commands\\In",
+            "create:mustache": "OsmScripts\\Osm\\Commands\\CreateMustache"
+        }
+    }
+}
