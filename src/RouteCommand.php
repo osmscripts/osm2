@@ -21,15 +21,17 @@ use Symfony\Component\Console\Input\InputOption;
  */
 abstract class RouteCommand extends AreaCommand
 {
-    public $use_http_get = true;
+    public $has_route_method_argument = false;
     public $returns = null;
 
     #region Properties
     public function default($property) {
         switch ($property) {
-            case 'route_method': return $this->use_http_get
-                ? 'GET' :
-                $this->str->upper($this->input->getArgument('route-method'));
+            case 'route_method':
+                if (!$this->has_route_method_argument) {
+                    throw new \Exception("Provide value for 'route_method' property in default() method");
+                }
+                return $this->str->upper($this->input->getArgument('route-method'));
             case 'route': return $this->input->getArgument('route');
             case 'route_name': return $this->getRouteName();
             case 'class': return "{$this->module_->namespace}\\Controllers\\" . ucfirst($this->area);
@@ -65,17 +67,27 @@ abstract class RouteCommand extends AreaCommand
         parent::configure();
         $this->setDescription("Creates new HTTP route and controller method");
 
-        if (!$this->use_http_get) {
+        $this->configureRouteMethod();
+        $this->configureRoute();
+        $this->configurePublic();
+        $this->addOption('method', null, InputOption::VALUE_OPTIONAL,
+            "Name of PHP controller method handling this route. If omitted, inferred from the last segment of route name");
+    }
+
+    protected function configureRouteMethod() {
+        if ($this->has_route_method_argument) {
             $this->addArgument('route-method', InputArgument::REQUIRED,
                 "HTTP method. Can be GET, POST or PUT or DELETE");
         }
+    }
 
-        $this
-            ->addArgument('route', InputArgument::REQUIRED, "Route path. Example: '/books/edit'")
-            ->addOption('method', null, InputOption::VALUE_OPTIONAL,
-                "Name of PHP controller method handling this route. If omitted, inferred from the last segment of route name")
-            ->addOption('public', null, InputOption::VALUE_NONE,
-                "If set, route is publicly accessible");
+    protected function configureRoute() {
+        $this->addArgument('route', InputArgument::REQUIRED, "Route path. Example: '/books/edit'");
+    }
+
+    protected function configurePublic() {
+        $this->addOption('public', null, InputOption::VALUE_NONE,
+            "If set, route is publicly accessible");
     }
 
     protected function handle() {

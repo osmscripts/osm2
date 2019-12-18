@@ -2,7 +2,6 @@
 
 namespace OsmScripts\Osm\Commands;
 
-use OsmScripts\Core\Command;
 use OsmScripts\Core\Script;
 use OsmScripts\Osm\RouteCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,6 +23,7 @@ class CreatePage extends RouteCommand
         global $script;
 
         switch ($property) {
+            case 'route_method': return 'GET';
             case 'layer': return strtr(substr($this->route_name, 1), '/-', '__');
             case 'css_modifier': return strtr($this->route_name, '/', '-');
             case 'js_class': return $this->input->getOption('js-class') ?: ucfirst($this->method);

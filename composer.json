@@ -33,7 +33,8 @@
                 "create:page": "OsmScripts\\Osm\\Commands\\CreatePage",
                 "create:route": "OsmScripts\\Osm\\Commands\\CreateRoute",
                 "translate": "OsmScripts\\Osm\\Commands\\Translate",
-                "in": "OsmScripts\\Osm\\Commands\\In"
+                "in": "OsmScripts\\Osm\\Commands\\In",
+                "create:mustache": "OsmScripts\\Osm\\Commands\\CreateMustache"
             }
         }
     },

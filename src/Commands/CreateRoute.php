@@ -20,7 +20,7 @@ use OsmScripts\Osm\RouteCommand;
  */
 class CreateRoute extends RouteCommand
 {
-    public $use_http_get = false;
+    public $has_route_method_argument = true;
     public $returns = 'JSON';
 
     protected function renderControllerMethod() {
