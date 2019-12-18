@@ -3,6 +3,7 @@
 /* @var string $namespace */
 /* @var string $test_namespace */
 /* @var string $sample_namespace */
+/* @var string $version_constraint */
 ?>
 {
     "name": "<?php echo $package ?>",
@@ -14,12 +15,10 @@
         }
     },
     "require": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "osmphp/framework": "<?php echo $version_constraint ?>"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.x-dev"
-        },
         "osm": {
             "component_pools": {
                 "src": {

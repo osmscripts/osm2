@@ -22,12 +22,14 @@ class CreatePackage extends BaseCreatePackage
         global $script;
 
         switch ($property) {
+            case 'base_package': return 'osmphp/framework';
             case 'test_namespace': return "{$this->namespace}Tests\\";
             case 'sample_namespace': return "{$this->namespace}Samples\\";
         }
 
         return parent::default($property);
     }
+
     #endregion
 
     protected function configure() {
@@ -56,6 +58,10 @@ EOT
             'namespace' => json_encode($this->namespace),
             'test_namespace' => json_encode($this->test_namespace),
             'sample_namespace' => json_encode($this->sample_namespace),
+            'version_constraint' => $this->version_constraint,
         ]));
+
+        $this->files->save("{$this->path}/.gitattributes",
+            $this->files->render('.gitattributes'));
     }
 }
