@@ -1,6 +1,6 @@
 {
     "name": "osmscripts\/osm",
-    "description": "Code generation and maintenance commands for Osm framework-based project.",
+    "description": "Osm project maintenance shell commands",
     "license": "GPL-3.0-only",
     "authors": [
         {
