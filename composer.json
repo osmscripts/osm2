@@ -1,5 +1,5 @@
 {
-    "name": "osmscripts\/osm",
+    "name": "osmscripts\/osm2",
     "description": "Osm project maintenance shell commands",
     "license": "GPL-3.0-only",
     "authors": [
@@ -14,8 +14,8 @@
         }
     },
     "require": {
-        "php": "^7.2",
-        "osmscripts\/core": "dev-master"
+        "php": ">=7.3",
+        "osmscripts\/core2": "^0.1"
     },
     "bin": [
         "osm"
