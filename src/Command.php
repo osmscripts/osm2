@@ -61,13 +61,13 @@ class Command extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         $this->verifyOsmProject($output);
-        parent::execute($input, $output);
+        return parent::execute($input, $output);
     }
 
     protected function verifyOsmProject(OutputInterface $output) {
         $packages = $this->project->packages;
 
-        if (!isset($packages['osmphp/framework'])) {
+        if (!isset($packages['osmphp/framework2'])) {
             throw new Exception("Before running this command, make directory of your " .
                 "Osm project a current directory");
         }
