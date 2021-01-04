@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "php": ">=7.3",
+        "php": ">=8.0",
         "osmscripts\/core2": "^0.1"
     },
     "bin": [

@@ -15,8 +15,8 @@
         }
     },
     "require": {
-        "php": "^7.2",
-        "osmphp/framework": "<?php echo $version_constraint ?>"
+        "php": ">=8.0",
+        "osmphp/framework2": "<?php echo $version_constraint ?>"
     },
     "extra": {
         "osm": {
